@@ -1,0 +1,6 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+sha_core.db
+sha_core_backup.db

@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHA CORE AI</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #06121c;
+            --panel: #0a1c28;
+            --card: #102936;
+            --border: #193b48;
+            --turquoise: #00e5d4;
+            --turquoise-dark: #00bbaa;
+            --text: #efffff;
+            --muted: #8ba9b3;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 22px;
+            background: var(--bg);
+            color: var(--text);
+            font-family: Inter, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            color: var(--turquoise);
+            letter-spacing: 4px;
+            font-size: 30px;
+            margin-bottom: 7px;
+            text-shadow: 0 0 20px #00e5d455;
+        }
+
+        header p, .welcome p {
+            color: var(--muted);
+        }
+
+        .main-layout {
+            display: flex;
+            gap: 18px;
+            width: 100%;
+            max-width: 1250px;
+            flex: 1;
+            margin: 0 auto;
+        }
+
+        .sidebar {
+            width: 265px;
+            flex-shrink: 0;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 22px;
+        }
+
+        .sidebar h2 {
+            color: var(--turquoise);
+            letter-spacing: 2px;
+            font-size: 20px;
+        }
+
+        .sidebar h3 {
+            color: var(--muted);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 28px;
+        }
+
+        #chatHistory button {
+            width: 100%;
+            text-align: left;
+            margin: 5px 0;
+            background: var(--card);
+            border: 1px solid var(--border);
+            overflow-wrap: anywhere;
+        }
+
+        .chat-box {
+            flex: 1;
+            min-width: 0;
+            min-height: 550px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .welcome {
+            text-align: center;
+            padding: 30px 0 15px;
+        }
+
+        .welcome h2 {
+            color: var(--turquoise);
+            font-size: 25px;
+        }
+
+        .welcome p {
+            font-size: 14px;
+        }
+
+        #chatMessages {
+            flex: 1;
+            min-height: 260px;
+            max-height: 430px;
+            overflow-y: auto;
+            margin: 20px 0;
+            padding-right: 5px;
+        }
+
+        #chatMessages p {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 14px 17px;
+            border-radius: 13px;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
+
+        .input-area {
+            display: flex;
+            gap: 12px;
+            padding: 10px;
+            background: #061720;
+            border: 1px solid var(--border);
+            border-radius: 15px;
+        }
+
+        input {
+            flex: 1;
+            min-width: 0;
+            padding: 14px;
+            background: transparent;
+            color: white;
+            border: none;
+            outline: none;
+            font-size: 14px;
+        }
+
+        input::placeholder {
+            color: #78949e;
+        }
+
+        button {
+            padding: 12px 20px;
+            background: var(--turquoise);
+            color: #03201f;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s ease;
+        }
+
+        button:hover {
+            background: var(--turquoise-dark);
+            transform: translateY(-1px);
+        }
+
+        .new-chat-btn {
+            width: 100%;
+            background: #103c43;
+            color: var(--turquoise);
+            border: 1px solid #17616a;
+        }
+
+        .new-chat-btn:hover {
+            background: #15515a;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 22px;
+            color: #66818b;
+            font-size: 12px;
+        }
+
+        @media (max-width: 650px) {
+            body {
+                padding: 12px;
+            }
+
+            .main-layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .chat-box {
+                min-height: 500px;
+                padding: 17px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>SHA CORE AI</h1>
+        <p>Your Intelligent AI Assistant</p>
+    </header>
+
+    <div class="main-layout">
+
+        <aside class="sidebar">
+            <h2>SHA CORE</h2>
+
+            <button class="new-chat-btn" onclick="newChat()">
+                + New Chat
+            </button>
+
+            <h3>Recent Chats</h3>
+
+            <div id="chatHistory"></div>
+        </aside>
+
+        <div class="chat-box">
+
+            <div class="welcome">
+                <h2>Welcome!</h2>
+                <p>How can I help you today?</p>
+            </div>
+
+            <div id="chatMessages"></div>
+
+            <div class="input-area">
+                <input
+                    type="text"
+                    id="userInput"
+                    placeholder="Message SHA CORE AI..."
+                >
+
+                <button onclick="sendMessage()">Send</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        Powered by SHA CORE AI | Created by Shahan Ali | Copyright 2026
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
