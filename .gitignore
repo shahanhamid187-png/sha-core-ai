@@ -4,3 +4,14 @@ __pycache__/
 *.pyc
 sha_core.db
 sha_core_backup.db
+
+# Backup and temporary files
+*.bak
+*.backup
+*.cloudflare-backup
+app_before_*.py
+script_before_*.js
+templates/index_before_*.html
+templates/index_*.html
+*.lnk
+*.mp3
